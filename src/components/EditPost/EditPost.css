@@ -15,3 +15,7 @@
 .EditPostForm textarea {
     height: 50px;
 }
+
+.FieldError {
+    color: red;
+}
