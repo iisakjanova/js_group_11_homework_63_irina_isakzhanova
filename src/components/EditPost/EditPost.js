@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import axiosApi from "../../axiosApi";
+import dayjs from "dayjs";
+import {useHistory} from "react-router-dom";
 
 import Spinner from "../UI/Spinner/Spinner";
 import './EditPost.css';
@@ -8,24 +10,29 @@ const EditPost = () => {
     const [post, setPost] = useState({
         title: '',
         text: '',
+        date: ''
     });
 
     const [loading, setLoading] = useState(false);
-
     const [fieldError, setFieldError] = useState('');
+
+    const history = useHistory();
 
     const handleFieldChange = e => {
         const {name, value} = e.target;
+
         setPost(prev => ({
             ...prev,
-            [name]: value
+            [name]: value,
+            date: dayjs().format('YYYY-MM-DD HH:mm'),
         }));
     };
 
     const sendCreatePostRequest = async () => {
         await axiosApi.post('/posts.json', {
             title: post.title,
-            text: post.text
+            text: post.text,
+            date: post.date
         });
     };
 
@@ -43,6 +50,7 @@ const EditPost = () => {
                 });
 
                 setFieldError('');
+                history.replace('/');
             } else {
                 setFieldError('* Fill all the fields, please!');
             }

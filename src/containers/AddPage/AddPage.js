@@ -1,9 +1,10 @@
 import React from 'react';
+import EditPost from "../../components/EditPost/EditPost";
 
 const AddPage = () => {
     return (
         <div>
-            Add
+            <EditPost />
         </div>
     );
 };
