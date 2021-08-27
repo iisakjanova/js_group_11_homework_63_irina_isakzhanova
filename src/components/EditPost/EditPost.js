@@ -7,16 +7,16 @@ import Spinner from "../UI/Spinner/Spinner";
 import './EditPost.css';
 
 const EditPost = () => {
+    const history = useHistory();
+
     const [post, setPost] = useState({
-        title: '',
-        text: '',
+        title: history.location.state?.title || '',
+        text: history.location.state?.text || '',
         date: ''
     });
 
     const [loading, setLoading] = useState(false);
     const [fieldError, setFieldError] = useState('');
-
-    const history = useHistory();
 
     const handleFieldChange = e => {
         const {name, value} = e.target;
@@ -36,10 +36,40 @@ const EditPost = () => {
         });
     };
 
-    const createPost = async e => {
+    const sendUpdatePostRequest = async () => {
+        await axiosApi.put('posts/' + history.location.state?.id + '.json', {
+            title: post.title,
+            text: post.text,
+        });
+    };
+
+    const handleFormSubmit = e => {
         e.preventDefault();
         setLoading(true);
 
+        if (history.location.state?.id) {
+            updatePost();
+        } else {
+            createPost();
+        }
+    };
+
+    const updatePost = async () => {
+        try {
+            if (post.title && post.text) {
+                await sendUpdatePostRequest();
+                setFieldError('');
+            } else {
+                setFieldError('* Fill all the fields, please!');
+            }
+        } catch (e) {
+            console.log(e);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const createPost = async () => {
         try {
             if (post.title && post.text) {
                 await sendCreatePostRequest();
@@ -54,8 +84,8 @@ const EditPost = () => {
             } else {
                 setFieldError('* Fill all the fields, please!');
             }
-        } finally {
-            setLoading(false);
+        } catch (e) {
+            console.log(e)
         }
     };
 
@@ -65,7 +95,7 @@ const EditPost = () => {
                 ?
                 <Spinner />
                 :
-                <form onSubmit={createPost}>
+                <form onSubmit={handleFormSubmit}>
                     <label>
                         <p>Title</p>
                         <input

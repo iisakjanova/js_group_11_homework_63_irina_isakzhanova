@@ -2,10 +2,13 @@ import React, {useEffect, useState} from 'react';
 import axiosApi from "../../axiosApi";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import Post from "../../components/Post/Post";
+import {useHistory} from "react-router-dom";
 
 const HomePage = () => {
     const [posts, setPosts] = useState('');
     const [loading, setLoading] = useState(false);
+
+    const history = useHistory();
 
     useEffect(() => {
         (async () => {
@@ -38,6 +41,7 @@ const HomePage = () => {
                             key={key}
                             date={posts[key].date}
                             title={posts[key].title}
+                            onClick={() => history.push('/posts/' + key)}
                         />
                     ))
                     :

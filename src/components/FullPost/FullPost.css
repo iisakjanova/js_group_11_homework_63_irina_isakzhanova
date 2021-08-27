@@ -1,0 +1,11 @@
+.FullPost {
+    border: 1px solid grey;
+    padding: 10px;
+}
+
+.FullPost button {
+    margin-right: 10px;
+}
+.PostBody {
+    margin-bottom: 30px;
+}
