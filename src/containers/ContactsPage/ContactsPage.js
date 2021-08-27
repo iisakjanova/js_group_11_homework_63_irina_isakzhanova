@@ -10,7 +10,6 @@ const ContactsPage = () => {
                 <p>Email: irina.isakjanova@gmail.com</p>
                 <p>Instagram: @irina_isakjanova</p>
             </div>
-
         </div>
     );
 };

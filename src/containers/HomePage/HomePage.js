@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import axiosApi from "../../axiosApi";
+import {useHistory} from "react-router-dom";
+
 import Spinner from "../../components/UI/Spinner/Spinner";
 import Post from "../../components/Post/Post";
-import {useHistory} from "react-router-dom";
 
 const HomePage = () => {
     const [posts, setPosts] = useState('');

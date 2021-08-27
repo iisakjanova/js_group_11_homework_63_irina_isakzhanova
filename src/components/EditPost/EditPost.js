@@ -85,7 +85,7 @@ const EditPost = () => {
                 setFieldError('* Fill all the fields, please!');
             }
         } catch (e) {
-            console.log(e)
+            console.log(e);
         }
     };
 

@@ -13,7 +13,6 @@ const AboutPage = () => {
                 <p>My main occupation is programming, but I spend my spare time writing interesting posts in this blog</p>
             </div>
         </div>
-
     );
 };
 
