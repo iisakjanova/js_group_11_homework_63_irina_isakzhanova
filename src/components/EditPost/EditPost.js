@@ -12,7 +12,7 @@ const EditPost = () => {
     const [post, setPost] = useState({
         title: history.location.state?.title || '',
         text: history.location.state?.text || '',
-        date: ''
+        date: history.location.state?.date || ''
     });
 
     const [loading, setLoading] = useState(false);
@@ -20,11 +20,14 @@ const EditPost = () => {
 
     const handleFieldChange = e => {
         const {name, value} = e.target;
+        const newDate = dayjs().format('YYYY-MM-DD HH:mm');
+        const oldDate = history.location.state?.date || newDate;
+        const date = history.location.state?.id ? oldDate : newDate;
 
         setPost(prev => ({
             ...prev,
             [name]: value,
-            date: dayjs().format('YYYY-MM-DD HH:mm'),
+            date
         }));
     };
 
@@ -40,6 +43,7 @@ const EditPost = () => {
         await axiosApi.put('posts/' + history.location.state?.id + '.json', {
             title: post.title,
             text: post.text,
+            date: post.date
         });
     };
 

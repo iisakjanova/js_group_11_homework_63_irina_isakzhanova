@@ -38,7 +38,8 @@ const FullPost = ({match}) => {
         history.replace('/posts/' + match.params.id + '/edit', {
             id: match.params.id,
             title: fullPost.title,
-            text: fullPost.text
+            text: fullPost.text,
+            date: fullPost.date
         });
     };
 
