@@ -1,0 +1,15 @@
+.AddPage {
+    border: 1px solid grey;
+}
+
+.AddPage h2 {
+    padding-left: 10px;
+    font-weight: 500;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.EditPostForm {
+    margin: 0 auto;
+}
